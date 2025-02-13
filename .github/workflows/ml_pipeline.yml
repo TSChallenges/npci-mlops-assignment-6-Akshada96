@@ -28,10 +28,11 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: my-trained-pipeline
-        path: models
+        path: data
         retention-days: 1
 
   train:
+    needs: preprocessing
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
