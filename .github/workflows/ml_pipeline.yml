@@ -25,6 +25,11 @@ jobs:
       run: pip install -r requirements.txt
     - name: Clean & transform dataset
       run: python preprocessing.py
+    - uses: actions/upload-artifact@v4
+      with:
+        name: my-pipeline
+        path: data/*.csv
+        retention-days: 1
 
   train:
     needs: preprocessing
@@ -64,9 +69,11 @@ jobs:
       with:
         name: my-pipeline
         path: models
+    - uses: actions/download-artifact@v4
+      with:
+        name: my-pipeline
+        path: data
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Clean & transform dataset
-      run: python preprocessing.py
     - name: Test with pytest
       run: pytest
