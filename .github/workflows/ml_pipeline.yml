@@ -25,11 +25,6 @@ jobs:
       run: pip install -r requirements.txt
     - name: Clean & transform dataset
       run: python preprocessing.py
-    - uses: actions/upload-artifact@v4
-      with:
-        name: my-trained-pipeline
-        path: data
-        retention-days: 1
 
   train:
     needs: preprocessing
@@ -50,7 +45,7 @@ jobs:
       run: python train_model.py
     - uses: actions/upload-artifact@v4
       with:
-        name: my-trained-pipeline
+        name: my-pipeline
         path: models/*.pkl
         retention-days: 1
 
