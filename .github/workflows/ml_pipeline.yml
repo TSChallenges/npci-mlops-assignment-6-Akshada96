@@ -12,15 +12,15 @@ on:
 
 jobs:
   preprocessing:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
+    - name: Set up Python 3.8
       uses: actions/setup-python@v3
       with:
-        python-version: '3.10'
+        python-version: '3.8'
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Clean & transform dataset
@@ -33,15 +33,15 @@ jobs:
 
   train:
     needs: preprocessing
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
+    - name: Set up Python 3.8
       uses: actions/setup-python@v3
       with:
-        python-version: '3.10'
+        python-version: '3.8'
     - name: Install dependencies
       run: pip install -r requirements.txt
     - uses: actions/download-artifact@v4
@@ -58,15 +58,15 @@ jobs:
 
   test:
     needs: train
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
+    - name: Set up Python 3.8
       uses: actions/setup-python@v3
       with:
-        python-version: '3.10'
+        python-version: '3.8'
     - uses: actions/download-artifact@v4
       with:
         name: train-model
